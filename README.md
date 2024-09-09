@@ -33,7 +33,7 @@ This project follows a collaborative, feature-driven development process. The te
 
 ## Sprint Overview
 - **Current Sprint**: GE03 - Models
-- **Objective**: Build the data models for the ParkingWebApp, including integration for reviews and surveys.
+- **Objective**: Build the data models, routing controllers, and web views for our individual portfolio_app.
 
 ---
 
