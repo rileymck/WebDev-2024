@@ -1,7 +1,7 @@
 # Team Epic Structure and Responsibilities
 
 ## Overview
-This project follows a collaborative, feature-driven development process. The team consists of clearly defined roles that contribute to the successful delivery of the web application features for ParkingWebApp.
+This project follows a collaborative, feature-driven development process. The team consists of clearly defined roles that contribute to the successful delivery of the web application features.
 
 ### Team Members:
 - **Riley McKenzie**: Scrum Coach
