@@ -16,7 +16,7 @@ To generate a Student model with the fields first_name, last_name, school_email,
 and graduation_date, run the following command:
 
 
-rails generate scaffold Student first_name:string last_name:string school_email:string major:string graduation_date:date
+***< rails generate scaffold Student first_name:string last_name:string school_email:string major:string graduation_date:date >***
 
 
 This command creates the model, views, and controller for the Student resource. It will also generate migrations 
@@ -31,7 +31,7 @@ for the database schema. However, additional constraints for validation are requ
 To enforce email uniqueness, add a custom migration for the school_email field run this command:
 
 
-rails generate migration AddIndexToStudentSchoolEmail
+***< rails generate migration AddIndexToStudentSchoolEmail >***
 
 
 Modify the migration file created in the db/migrate directory as follows:
@@ -47,7 +47,7 @@ end
 Run the migration to apply changes:
 
 
-rails db:migrate
+***< rails db:migrate >***
 
 
 This ensures that the email is unique and indexed for quick lookups (Hartl, 2022).
@@ -85,7 +85,7 @@ This ensures that:
 ActiveStorage allows you to attach files, such as profile pictures, to your models. To install ActiveStorage, run the following command:
 
 
-rails active_storage:install
+***< rails active_storage:install >***
 
 
 Then, run the database migration:
@@ -141,7 +141,7 @@ class StudentsController < ApplicationController
 
   private
 
-  # Only allow a list of trusted parameters through.
+  # Only allow a list of trusted parameters through. (ONLY COPY AND REPLACE THE DEF METHOD AT THE END OF THE STUDEN CONTROLLER)
   def student_params
     params.require(:student).permit(:first_name, :last_name, :school_email, :major, :graduation_date, :profile_picture)
   end
