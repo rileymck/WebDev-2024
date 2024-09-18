@@ -30,7 +30,9 @@ for the database schema. However, additional constraints for validation are requ
 
 To enforce email uniqueness, add a custom migration for the school_email field run this command:
 
+
 rails generate migration AddIndexToStudentSchoolEmail
+
 
 Modify the migration file created in the db/migrate directory as follows:
 
