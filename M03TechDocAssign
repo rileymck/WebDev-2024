@@ -1,1 +1,219 @@
+Handling User Stories with Rails Scaffold, Custom Migrations, and ActiveStorage
+
+This guide explains how to handle user stories by creating a Rails scaffold and writing 
+
+custom database migrations to implement required features. Below are step-by-step instructions for 
+
+setting up the project using Rails.
+
+
+
+
+1. Rails Scaffold Command for User Story 1: Create a Student
+
+To generate a Student model with the fields first_name, last_name, school_email, major, 
+
+and graduation_date, run the following command:
+
+rails generate scaffold Student first_name:string last_name:string school_email:string major:string graduation_date:date
+
+This command creates the model, views, and controller for the Student resource. It will also generate migrations 
+
+for the database schema. However, additional constraints for validation are required (Hartl, 2022).
+
+
+
+
+2. Custom Migration for Email Validation
+
+To enforce email uniqueness, add a custom migration for the school_email field run this command:
+
+rails generate migration AddIndexToStudentSchoolEmail
+
+Modify the migration file created in the db/migrate directory as follows:
+
+class AddIndexToStudentSchoolEmail < ActiveRecord::Migration[7.0]
+  def change
+    add_index :students, :school_email, unique: true
+  end
+end
+
+Run the migration to apply changes:
+
+rails db:migrate
+
+This ensures that the email is unique and indexed for quick lookups (Hartl, 2022).
+
+
+
+
+3. Model Validations for User Story 1 and 2
+
+In the app/models/student.rb, you need to define validations for fields such as first_name, last_name, 
+
+and school_email. The school_email must also follow a specific format. Here’s how you define these validations:
+
+class Student < ApplicationRecord
+  has_one_attached :profile_picture # For ActiveStorage
+
+  validates :first_name, :last_name, :major, presence: true, length: { in: 2..25 }
+  validates :school_email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@msudenver.edu\z/i, message: "must be a valid MSU Denver email" }
+  validates :graduation_date, presence: true
+end
+
+This ensures that:
+
+	•	first_name, last_name, and major are mandatory and within the character limit of 2 to 25.
+	•	school_email must be unique and follow the @msudenver.edu format.
+	•	graduation_date must be present (Hartl, 2022).
+
+
+
+
+4. Set Up ActiveStorage for Profile Pictures (User Story 3)
+
+ActiveStorage allows you to attach files, such as profile pictures, to your models. To install ActiveStorage, run the following command:
+
+rails active_storage:install
+
+Then, run the database migration:
+
+rails db:migrate
+
+
+
+
+5. Profile Picture Display (User Story 3)
+
+In the app/views/students/show.html.erb, you need to add logic to display the profile picture if it exists, 
+
+or a default image otherwise:
+
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @student %>
+
+<div>
+  <!-- Display profile picture or a default image -->
+  <% if @student.profile_picture.attached? %>
+    <%= image_tag @student.profile_picture.variant(resize_to_fill: [200, 200]), alt: "Profile Picture" %>
+  <% else %>
+    <%= image_tag asset_path('default_profile_picture.png'), size: "200x200", alt: "Default Profile Picture" %>
+  <% end %>
+
+  <%= link_to "Edit this student", edit_student_path(@student) %> |
+  <%= link_to "Back to students", students_path %>
+
+  <%= button_to "Destroy this student", @student, method: :delete %>
+</div>
+
+
+This snippet displays either the student’s uploaded profile picture or a default image if no picture is 
+
+attached (Rails Guides, n.d.).
+
+
+
+
+6. Modify StudentsController to Permit Profile Picture Uploads
+
+Update the StudentsController to allow profile_picture uploads. Modify the student_params 
+
+method in app/controllers/students_controller.rb:
+
+
+class StudentsController < ApplicationController
+  # Other actions...
+
+  private
+
+  # Only allow a list of trusted parameters through.
+  def student_params
+    params.require(:student).permit(:first_name, :last_name, :school_email, :major, :graduation_date, :profile_picture)
+  end
+end
+
+
+This update ensures that the profile_picture attribute is allowed when students are created or updated (Rails Guides, n.d.).
+
+
+
+
+7. Add File Field to the Form for Profile Picture Upload
+
+In app/views/students/_form.html.erb, add a file upload field for the profile_picture:
+
+<%= form_with(model: student, local: true) do |form| %>
+  <% if student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+        <% student.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :school_email %>
+    <%= form.email_field :school_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :major %>
+    <%= form.text_field :major %>
+  </div>
+
+  <div class="field">
+    <%= form.label :graduation_date %>
+    <%= form.date_select :graduation_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :profile_picture %>
+    <%= form.file_field :profile_picture %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+This field allows students to upload a profile picture when creating or updating their profiles (Rails Guides, n.d.).
+
+
+
+
+8. Add a Default Profile Picture (make sure the default is 200x 200x in size and name it default_profile_picture.png).
+
+Place a default image (default_profile_picture.png) in the app/assets/images/ directory. This image will be displayed when the 
+
+student has not uploaded a profile picture (Rails Guides, n.d.).
+
+
+
+
+References
+
+Hartl, M. (2022). Ruby on Rails Tutorial: Learn Web Development with Rails (7th ed.). Addison-Wesley Professional. https://www.railstutorial.org/book
+
+Rails Guides. (n.d.). Active Storage Overview. Ruby on Rails Guides. https://guides.rubyonrails.org/active_storage_overview.html
+
+Rails Guides. (n.d.). Getting Started with Rails. Ruby on Rails Guides. https://guides.rubyonrails.org/getting_started.html
+
+
 
