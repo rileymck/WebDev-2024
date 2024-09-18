@@ -91,7 +91,7 @@ ActiveStorage allows you to attach files, such as profile pictures, to your mode
 Then, run the database migration:
 
 
-rails db:migrate
+***< rails db:migrate >***
 
 
 
