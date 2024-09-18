@@ -37,7 +37,7 @@ rails generate migration AddIndexToStudentSchoolEmail
 Modify the migration file created in the db/migrate directory as follows:
 
 
-class AddIndexToStudentSchoolEmail < ActiveRecord::Migration[7.2]
+class AddIndexToStudentSchoolEmail < ActiveRecord::Migration[7.1]
   def change
     add_index :students, :school_email, unique: true
   end
