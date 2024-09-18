@@ -15,7 +15,9 @@ To generate a Student model with the fields first_name, last_name, school_email,
 
 and graduation_date, run the following command:
 
+
 rails generate scaffold Student first_name:string last_name:string school_email:string major:string graduation_date:date
+
 
 This command creates the model, views, and controller for the Student resource. It will also generate migrations 
 
@@ -32,15 +34,19 @@ rails generate migration AddIndexToStudentSchoolEmail
 
 Modify the migration file created in the db/migrate directory as follows:
 
+
 class AddIndexToStudentSchoolEmail < ActiveRecord::Migration[7.0]
   def change
     add_index :students, :school_email, unique: true
   end
 end
 
+
 Run the migration to apply changes:
 
+
 rails db:migrate
+
 
 This ensures that the email is unique and indexed for quick lookups (Hartl, 2022).
 
@@ -53,6 +59,7 @@ In the app/models/student.rb, you need to define validations for fields such as 
 
 and school_email. The school_email must also follow a specific format. Here’s how you define these validations:
 
+
 class Student < ApplicationRecord
   has_one_attached :profile_picture # For ActiveStorage
 
@@ -60,6 +67,7 @@ class Student < ApplicationRecord
   validates :school_email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@msudenver.edu\z/i, message: "must be a valid MSU Denver email" }
   validates :graduation_date, presence: true
 end
+
 
 This ensures that:
 
@@ -74,9 +82,12 @@ This ensures that:
 
 ActiveStorage allows you to attach files, such as profile pictures, to your models. To install ActiveStorage, run the following command:
 
+
 rails active_storage:install
 
+
 Then, run the database migration:
+
 
 rails db:migrate
 
@@ -143,6 +154,7 @@ This update ensures that the profile_picture attribute is allowed when students 
 7. Add File Field to the Form for Profile Picture Upload
 
 In app/views/students/_form.html.erb, add a file upload field for the profile_picture:
+
 
 <%= form_with(model: student, local: true) do |form| %>
   <% if student.errors.any? %>
