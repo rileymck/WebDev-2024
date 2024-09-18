@@ -318,5 +318,5 @@ class StudentTest < ActiveSupport::TestCase
 
 
 
-
+This ensures that the testing methods are isolated. 
 
