@@ -5,3 +5,182 @@ Tech Lead: Will
 Team Members: Riley, Will, Penny, Jacobe, Imrane
 Scrum Stand Up Meetings: TBD
 Asynchronous team check in schedule:  TBD
+
+***********   Teams Tasks   Updated by your Tech Lead William Maddock   **********    
+
+***********   Please see Teams for a better view   *******************************
+
+Scrum Coach - Riley McKenzie
+
+
+
+  •  Responsibility:
+
+  •  Oversee the flow of work, ensuring the team meets deadlines and stays aligned with the project’s scope.
+
+  •  Handle testing section setup and ensure the team follows best practices for TDD.
+
+  •  Collaborate with others to review code snippets and tests.
+
+  •  Owns Section:
+
+10. Testing (TDD) for Student Model and Features
+
+
+
+Team Member - Jacob Sliva
+
+
+
+  •  Responsibility:
+
+  •  Focus on handling ActiveStorage setup and customization for profile pictures, including the form modifications and controller updates.
+
+  •  Ensure that the image upload and display functionality works properly.
+
+  •  Owns Sections:
+
+5. Setting Up ActiveStorage
+
+6. Displaying Profile Picture
+
+7. Modifying StudentsController to Permit Profile Picture Uploads
+
+
+
+Team Member - Penny Weiser
+
+
+
+  •  Responsibility:
+
+  •  Implement and document the Rails scaffold generation, and manage custom migrations related to email validation.
+
+  •  Ensure migration files are properly handled and constraints are applied to the database.
+
+  •  Owns Sections:
+
+2. Generating a Rails Scaffold
+
+3. Custom Migration for Email Validation
+
+
+
+Team Member - Imrane Mariami
+
+
+
+  •  Responsibility:
+
+  •  Handle model validations, ensuring data integrity for fields like first_name, last_name, major, and school_email.
+
+  •  Collaborate with Penny on migration validation.
+
+  •  Owns Sections:
+
+4. Model Validations
+
+8. Adding File Upload Field to Form
+
+9. Adding a Default Profile Picture
+
+
+
+
+***********   Outline   **************   
+
+
+
+  1.  Introduction
+
+  •  Purpose: To provide a step-by-step guide for handling user stories in a Rails project.
+
+  •  Overview: Explains the use of Rails scaffold, custom migrations, ActiveStorage, and TDD to manage key features like student profiles and profile picture uploads.
+
+  2.  Generating a Rails Scaffold for User Story 1: Creating a Student
+
+  •  Scaffold Command
+
+  •  Database Schema Generation
+
+  •  Next Steps: Customizing Validations
+
+  3.  Custom Migration for Email Validation
+
+  •  Generating a Migration
+
+  •  Modifying Migration File
+
+  •  Running the Migration
+
+  4.  Model Validations for User Stories 1 and 2
+
+  •  Validating Fields: First Name, Last Name, Major, School Email, Graduation Date
+
+  •  Uniqueness and Format of School Email
+
+  5.  Setting Up ActiveStorage for Profile Pictures (User Story 3)
+
+  •  Installing ActiveStorage
+
+  •  Migrating the Database
+
+  6.  Displaying the Profile Picture (User Story 3)
+
+  •  Show View Logic: Displaying Uploaded or Default Image
+
+  •  Image Variants and Resizing
+
+  7.  Modifying StudentsController to Permit Profile Picture Uploads
+
+  •  Strong Parameters for Profile Picture
+
+  8.  Adding File Upload Field to Form for Profile Picture
+
+  •  Updating Form for Profile Picture Input
+
+  9.  Adding a Default Profile Picture
+
+  •  Setting Default Image in Assets
+
+  10.  Testing (TDD) for Student Model and Features
+
+
+
+  •  Test Setup: Student Fixtures
+
+  •  Key Tests for Validation, Uniqueness, and Saving
+
+
+
+  11.  References
+
+
+
+  •  Cited Materials: Books, Documentation, etc.
+
+
+
+Team Role Assignments
+
+
+
+Team Lead (Tech Lead) - William Maddock
+
+
+
+  •  Responsibility:
+
+  •  Ensure the overall structure of the document is clear and aligned with the project’s technical goals.
+
+  •  Provide final review and integration of each section.
+
+  •  Guide the team on technical content, validations, and ActiveStorage implementation.
+
+  •  Prepare the introduction and conclusion.
+
+  •  Owns Sections:
+
+  1.  Introduction
+
+  11.  References
