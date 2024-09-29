@@ -162,18 +162,39 @@ Team Member - Imrane Mariami
   5.  Setting Up ActiveStorage for Profile Pictures (User Story 3)
 
   •  Installing ActiveStorage
+     The first command we used was to install the ActiveStorage module that allows us to attach media files such as gifs or images to a model:
+     rails active_storage:install
 
   •  Migrating the Database
+     We ran the database migration with rails "db:migrate".
 
   6.  Displaying the Profile Picture (User Story 3)
 
   •  Show View Logic: Displaying Uploaded or Default Image
+     In order to make sure the profile pictures loaded properly and accounted for when users don't have profile pictures we added this logic to the show.html.erb file
+     that shows an individual student:
+
+     <div>
+       <!-- Display profile picture or a default image -->
+       <% if @student.profile_picture.attached? %>
+         <%= image_tag @student.profile_picture.variant(resize_to_fill: [200, 200]), alt: "Profile Picture" %>
+       <% else %>
+         <%= image_tag asset_path('default_profile_picture.png'), size: "200x200", alt: "Default Profile Picture" %>
+       <% end %>
 
   •  Image Variants and Resizing
+     Using the "resize_to_fill" command that comes with the ImageMagick addon, we set all of the profile pictures to 200x200 in order to display the profile pictures consistently.
 
   7.  Modifying StudentsController to Permit Profile Picture Uploads
-
+  
   •  Strong Parameters for Profile Picture
+     In order to make sure the database is accounting for the profile pictures, we added the ":profile_picture" parameter to the defined student attritubes:
+      
+       def student_params
+         params.require(:student).permit(:first_name, :last_name, :school_email, :major, :graduation_date, :profile_picture)
+       end
+     
+     
 
   8.  Adding File Upload Field to Form for Profile Picture
 
